@@ -51,6 +51,7 @@ module Pipedrive
     # @return [Boolean]
     def update(opts = {})
       res = put "#{resource_path}/#{id}", :body => opts
+      puts "---> IN BASE#update---#{opts}"
       if res.success?
         res['data'] = Hash[res['data'].map {|k, v| [k.to_sym, v] }]
         @table.merge!(res['data'])
@@ -100,6 +101,7 @@ module Pipedrive
 
       def create( opts = {} )
         res = post resource_path, :body => opts
+        puts "--->In BASE#create---#{opts}---"
         if res.success?
           res['data'] = opts.merge res['data']
           new(res)
