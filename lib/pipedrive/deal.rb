@@ -5,6 +5,12 @@ module Pipedrive
       res = post "#{resource_path}/#{id}/products", :body => opts
       res.success? ? res['data']['product_attachment_id'] : bad_response(res,opts)
     end
+    
+    
+    def add_participant(opts = {})
+      res = post "#{resource_path}/#{id}/participants", :body => opts
+      res.success? ? res['data'] : bad_response(res,opts)
+    end
 
     def products
       Product.all(get "#{resource_path}/#{id}/products")
